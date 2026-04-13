@@ -45,6 +45,11 @@
               </form>
             </div>
           </div>
+          <div class="mt-3 grid gap-2 rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
+            <p><span class="font-semibold">Title:</span> {{ link.title or "not available" }}</p>
+            <p><span class="font-semibold">Description:</span> {{ link.description or "not available" }}</p>
+            <p class="break-all"><span class="font-semibold">Image URL:</span> {{ link.image_url or "not available" }}</p>
+          </div>
         </li>
         {% endfor %}
       </ul>
