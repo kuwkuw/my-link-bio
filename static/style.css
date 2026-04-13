@@ -1,0 +1,13 @@
+/* Small custom layer on top of Tailwind utilities. */
+body {
+  background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 45%, #f8fafc 100%);
+}
+
+.link-card {
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.link-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
