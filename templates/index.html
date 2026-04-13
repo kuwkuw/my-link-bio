@@ -8,6 +8,17 @@
   <body>
     <a href="{{ url_for('about') }}">About</a>
     <h1>{{ page_title }}</h1>
+
+    <form action="{{ url_for('add_link') }}" method="post">
+      <label for="site_name">Site Name</label>
+      <input type="text" id="site_name" name="site_name" required />
+
+      <label for="site_url">URL</label>
+      <input type="url" id="site_url" name="site_url" required />
+
+      <button type="submit">add link</button>
+    </form>
+
     <ul>
       {% for link in links %}
       <li><a href="{{ link.url }}">{{ link.name }}</a></li>

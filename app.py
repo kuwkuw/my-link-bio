@@ -1,16 +1,29 @@
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template, request, url_for
 
 app = Flask(__name__)
+
+# In-memory storage for links. This resets when the app restarts.
+links = [
+    {"name": "GitHub", "url": "https://github.com"},
+    {"name": "LinkedIn", "url": "https://www.linkedin.com"},
+    {"name": "YouTube", "url": "https://www.youtube.com"},
+]
 
 
 @app.route("/")
 def home():
-    links = [
-        {"name": "GitHub", "url": "https://github.com"},
-        {"name": "LinkedIn", "url": "https://www.linkedin.com"},
-        {"name": "YouTube", "url": "https://www.youtube.com"},
-    ]
     return render_template("index.html", page_title="My Links", links=links)
+
+
+@app.route("/add", methods=["POST"])
+def add_link():
+    site_name = request.form.get("site_name", "").strip()
+    site_url = request.form.get("site_url", "").strip()
+
+    if site_name and site_url:
+        links.append({"name": site_name, "url": site_url})
+
+    return redirect(url_for("home"))
 
 
 @app.route("/about")
