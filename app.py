@@ -128,6 +128,11 @@ def about():
     return render_template("about.html")
 
 
+@app.route("/contact")
+def contact():
+    return render_template("contact.html", page_title="Contact")
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     # Flask docs recommend returning the template with the explicit status code.
