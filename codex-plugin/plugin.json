@@ -1,0 +1,22 @@
+{
+  "name": "Flask Project Toolkit",
+  "version": "1.0",
+  "description": "A plugin that bundles a README documentation skill in Context 7 MCP for Flask projects.",
+  "author": "GPT-5.3-Codex",
+  "skills": [
+    "/Codex/skills/Update Readme/skill.md"
+  ],
+  "mcpServers": {
+    "Context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7/mcp"
+      ]
+    }
+  },
+  "interface": {
+    "displayName": "Flask Project Toolkit",
+    "shortDescription": "Auto Documenting Readme and Live Flask Docs in one install"
+  }
+}
