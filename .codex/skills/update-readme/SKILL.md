@@ -1,10 +1,9 @@
 ---
-name: Update Readme
+name: Update README
 description: Use this skill when a new feature, route, or dependency is added to the project.
 ---
 
-# Update Readme
-
+# Update README
 Use this skill anytime a code change adds or modifies a feature, route, or dependency.
 
 ## Workflow

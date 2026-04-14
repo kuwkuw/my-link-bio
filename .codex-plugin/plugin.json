@@ -4,7 +4,7 @@
   "description": "A plugin that bundles a README documentation skill in Context 7 MCP for Flask projects.",
   "author": "GPT-5.3-Codex",
   "skills": [
-    "/Codex/skills/Update Readme/skill.md"
+    "/.codex/skills/update-readme/SKILL.md"
   ],
   "mcpServers": {
     "Context7": {
