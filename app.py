@@ -1,6 +1,10 @@
+import logging
+
 from flask import Flask, redirect, render_template, request, url_for
 import requests
 from bs4 import BeautifulSoup
+
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 
@@ -47,7 +51,12 @@ def extract_open_graph_data(site_url):
             headers={"User-Agent": "Mozilla/5.0 (compatible; LinkBioBot/1.0)"},
         )
         response.raise_for_status()
-    except requests.RequestException:
+    except requests.RequestException as e:
+        logging.warning(
+            "FetchLinkMetadata request failed: url=%s error=%s",
+            site_url,
+            str(e),
+        )
         return open_graph_data
 
     soup = BeautifulSoup(response.text, "html.parser")
@@ -78,6 +87,13 @@ def add_link():
 
     if site_name and site_url:
         open_graph_data = extract_open_graph_data(site_url)
+        default_value = "not available"
+        if (
+            open_graph_data.get("title") == default_value
+            and open_graph_data.get("description") == default_value
+            and open_graph_data.get("image_url") == default_value
+        ):
+            logging.warning("Metadata could not be retrieved for url=%s", site_url)
         links.append(
             {
                 "name": site_name,
@@ -87,6 +103,7 @@ def add_link():
                 "image_url": open_graph_data["image_url"],
             }
         )
+        logging.info("Added new link: name=%s url=%s", site_name, site_url)
 
     return redirect(url_for("home"))
 
