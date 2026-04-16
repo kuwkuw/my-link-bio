@@ -1,6 +1,6 @@
 import logging
 import os
-from datetime import datetim
+from datetime import datetime
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
 
