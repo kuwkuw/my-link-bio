@@ -1,12 +1,14 @@
 import logging
+import os
 
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for
 import requests
 from bs4 import BeautifulSoup
 
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret-key")
 
 # In-memory storage for links. This resets when the app restarts.
 links = [
@@ -94,6 +96,10 @@ def add_link():
             and open_graph_data.get("image_url") == default_value
         ):
             logging.warning("Metadata could not be retrieved for url=%s", site_url)
+            flash(
+                "we saved your link, but could not retrieve a preview for that URL.",
+                "warning",
+            )
         links.append(
             {
                 "name": site_name,
