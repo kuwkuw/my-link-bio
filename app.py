@@ -1,7 +1,9 @@
 import logging
 import os
+from datetime import datetim
 
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -80,6 +82,16 @@ def extract_open_graph_data(site_url):
 @app.route("/")
 def home():
     return render_template("index.html", page_title="My Links", links=links)
+
+
+@app.route("/health")
+def health():
+    # Health check endpoint intended for uptime monitoring.
+    try:
+        return jsonify({"status": "OK", "server_time": datetime.now().isoformat()}), 200
+    except Exception:
+        logging.exception("Health check failed")
+        return jsonify({"status": "error"}), 500
 
 
 @app.route("/add", methods=["POST"])
