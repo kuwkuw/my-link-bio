@@ -10,6 +10,7 @@ A personal link-in-bio page built with Flask where users can save links and view
 - Delete links from the home page.
 - About page at `/about`.
 - Contact page at `/contact` with a short message and an email link (`hello@example.com`).
+- Health check endpoint at `/health` returning JSON status and server time.
 - Custom error pages for 404 and 500 errors.
 
 ## Setup
